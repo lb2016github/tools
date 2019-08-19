@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Author	: luobo
-# @Contact	: luobo@corp.netease.com
+# @Contact	: helloluobo@126.com
 # @Date		: 2019/8/19
 # @File		: g
 # @Desc		: global
