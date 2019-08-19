@@ -19,7 +19,6 @@ class CSDParser(object):
 				res_path = res_str[6: -1]
 				if len(res_path) > 0 and res_path not in self.res_set:
 					self.res_set.add(res_path)
-		print self.res_set
 
 	def get_res_set(self):
 		return self.res_set
