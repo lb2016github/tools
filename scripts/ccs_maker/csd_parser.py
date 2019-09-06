@@ -17,6 +17,9 @@ class CSDParser(object):
 			rst = re.findall('Path=\".+?\..+?\"', txt, )
 			for res_str in rst:
 				res_path = res_str[6: -1]
+				if res_path.startswith("Default"):
+					# 过滤Defualt的，因为Default的是自动生成的，资源里面并没有
+					continue
 				if len(res_path) > 0 and res_path not in self.res_set:
 					self.res_set.add(res_path)
 
