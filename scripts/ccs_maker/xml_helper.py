@@ -49,9 +49,10 @@ class ResElement(XMLElement):
 		if tag_name:
 			return cls(tag_name, res_name)
 		else:
-			print("Error: No Element is found with suffix", suffix)
-			return None
+			raise ResException("Unkown suffix %s"%suffix)
 
+class ResException(Exception):
+	pass
 
 def register_elements():
 	ele_dict = {

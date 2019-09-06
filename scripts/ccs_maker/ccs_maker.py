@@ -20,13 +20,13 @@ class CCSMaker(object):
 		self._init_parsers()
 
 	def _init_parsers(self):
-		name_pattern = "|".join(self.csd_name_list)
 		pattern = "^.+\.csd"
 		def on_match(root, name, is_file):
 			if not is_file:
 				return
 			if name not in self.csd_name_list:
 				return
+			print ("Find csd: %s"% name)
 			file_path = os.path.join(root, name)
 			self.csd_parsers.append(csd_parser.CSDParser(file_path))
 
@@ -100,15 +100,20 @@ if __name__ == "__main__":
 	import init, g
 	print g.script_dir
 	print g.res_dir
-	root_dir = r"G:\dts\lb\branches\dev_develop3\cocos\cocosstudio"
+	root_dir = r"G:\g95na\cocos\ui\cocosstudio"
 	ccs_dir = os.path.join(root_dir, "csb")
-	csd_list = []
-	target_file = "tmp.ccs"
+	csd_list = ["1441_905.csd", "mall_recommend_big_item_1411_905.csd"]
+	target_file = os.path.join(root_dir, "../tmp.ccs")
+	cocos_tool_dir = r"D:\Develop\Cocos\CocosStudio\Cocos.Tool.exe"
+	out_dir = os.path.join(root_dir, "../res")
 	print ccs_dir
 	from common import file_helper
-	def on_match(root, file_name, is_file):
-		csd_list.append(file_name)
-	file_helper.walk_directory(ccs_dir, "^.+\.csd", on_match=on_match)
+	# def on_match(root, file_name, is_file):
+	# 	csd_list.append(file_name)
+	# file_helper.walk_directory(ccs_dir, "^.+\.csd", on_match=on_match)
 	make = CCSMaker(root_dir, ccs_dir, csd_list, target_file)
 	make.make()
+	cmd = "%s publish -f %s -o %s -d Serializer_FlatBuffers"%(cocos_tool_dir, target_file, out_dir)
+	print (cmd)
+	os.system(cmd)
 
