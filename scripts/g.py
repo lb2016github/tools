@@ -7,3 +7,6 @@
 
 script_dir = "" # script dir
 res_dir = ""    # res directory
+
+
+import init

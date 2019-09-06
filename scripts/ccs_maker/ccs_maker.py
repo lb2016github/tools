@@ -7,14 +7,14 @@
 import os
 import csd_parser
 import xml_helper
-
+import g
 
 class CCSMaker(object):
-	def __init__(self, root_dir, csd_root_dir, csd_name_list, target_path):
-		self.root_dir = root_dir
-		self.csd_root_dir = csd_root_dir
-		self.csd_name_list = csd_name_list
-		self.target_path = target_path  # target file path
+	def __init__(self, root_dir, csd_root_dir=None, csd_name_list=None, target_path=None):
+		self.root_dir = root_dir	# csd和资源所在目录
+		self.csd_root_dir = csd_root_dir	# csd所在的根目录
+		self.csd_name_list = csd_name_list	# 如果没有指定，则表示匹配所有
+		self.target_path = target_path  # 生成的ccs文件
 		# ======= created data
 		self.csd_parsers = []
 		self._init_parsers()
@@ -24,7 +24,7 @@ class CCSMaker(object):
 		def on_match(root, name, is_file):
 			if not is_file:
 				return
-			if name not in self.csd_name_list:
+			if self.csd_name_list and name not in self.csd_name_list:
 				return
 			print ("Find csd: %s"% name)
 			file_path = os.path.join(root, name)
@@ -97,7 +97,6 @@ class CCSMaker(object):
 
 
 if __name__ == "__main__":
-	import init, g
 	print g.script_dir
 	print g.res_dir
 	root_dir = r"G:\g95na\cocos\ui\cocosstudio"
