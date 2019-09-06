@@ -6,7 +6,7 @@
 # @Desc		:
 
 
-def _set_dirs():
+def _init_path():
 	import os, g
 	cur_path = os.path.abspath(__file__)
 	g.script_dir = os.path.dirname(cur_path)
@@ -15,5 +15,5 @@ def _set_dirs():
 	import sys
 	sys.path.append(g.script_dir)
 
-_set_dirs()
 
+_init_path()
